@@ -88,6 +88,10 @@ function handleSwipeEnd(e) {
 	}
 }
 
+/*
+* TODO: fix transition bug when swiping
+*/
+
 function toggleSwipe(direction) {
 	if (direction === 'prev') {
 		const targetPrevBtn = document.querySelector('.gallery input[type=radio]:checked ~ .prev-btn');
