@@ -1,5 +1,3 @@
-
-
 /*
 * When prev button is clicked, add class, '.for-prev' to '.stand-by-image', else, remove.
 */
@@ -10,23 +8,18 @@ const state = {
 
 document.querySelectorAll('label.arrow-btn').forEach((btn, i) => {
 	btn.addEventListener('click', e => {
-		console.log('button classname', btn.className);
 		if (btn.className.includes('prev')) {
+			// Prev button clicked
 			addClassToStandByImages();
 			if (state.currentDirection !== 'prev') {
-				console.log('switch to prev');
-				// transformX the next image by -100%
-				console.log('A index; ', btn.getAttribute('for'));
-				flipIdPosition(btn.getAttribute('for'), 'prev');
+				flipIdPosition(btn.getAttribute('for'), Math.floor(i / 2), 'prev');
 			}
 			
 		} else {
+			// Next button clicked
 			removeClassToStandByImages();
 			if (state.currentDirection !== 'next') {
-				console.log('switch to next');
-				// transformX the next image by 100%
-				console.log('B index: ', btn.getAttribute('for'));
-				flipIdPosition(btn.getAttribute('for'), 'next');
+				flipIdPosition(btn.getAttribute('for'), Math.floor(i / 2), 'next');
 			}
 		}
 
@@ -45,21 +38,17 @@ function removeClassToStandByImages() {
 	});
 }
 
-function flipIdPosition(id, direction) {
+function flipIdPosition(id, currentIndex, direction) {
 	const targetRadioButton = document.getElementById(id);
+	const predecessorImage = standByImages[currentIndex];
 	targetRadioButton.classList.add('in-transit');
+	predecessorImage.classList.add('predecessor-image');
 	state.currentDirection = direction;
 	setTimeout(() => {
 		targetRadioButton.classList.remove('in-transit');
-	}, 500)
+	});
+	setTimeout(() => {
+		predecessorImage.classList.remove('predecessor-image');
+	}, 500);
 }
 
-function toggleTransitionClass(direction) {
-	standByImages.forEach(image => {
-		image.classList.add('flipping-direction');
-		setTimeout(() => {
-			image.classList.remove('flipping-direction');
-			state.currentDirection = direction;
-		}, 500);
-	});
-}

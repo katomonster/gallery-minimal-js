@@ -24,6 +24,17 @@ figure {
     transform: translateX(0);
     z-index: 10;
 }
+
+.gallery-slider input.in-transit[type=radio]:checked  + .stand-by-image {
+    transform: translateX(100%);
+    transition: transform 0ms;
+}
+
+.gallery-slider input.in-transit[type=radio]:checked + .stand-by-image.for-prev {
+    transform: translateX(-100%);
+    transition: transform 0ms;
+}
+
 .gallery-slider input[type=radio]:not(:active) + .stand-by-image {
     transition: transform 500ms ease-out;
 }
@@ -31,6 +42,10 @@ figure {
 .gallery-slider input[type=radio]:checked + .stand-by-image.flipping-image {
     transform: translateX(100%);
     transition: transform 0ms;
+}
+
+.predecessor-image {
+    z-index: 10;
 }
 
 
@@ -43,21 +58,11 @@ figure {
     transform: translateX(100%);
 }
 
-.in-transit + .stand-by-image {
-    transform: translateX(100%);
-}
-
-.in-transit + .stand-by-image.for-prev {
-    transform: translateX(-100%);
-}
-
 .gallery-slider input[type=radio]:active + .stand-by-image:not(.flipping-direction) {
     transform: translateX(100%);
-    z-index: 10;
 }
 .gallery-slider input[type=radio]:active + .stand-by-image.for-prev:not(.flipping-direction)   {
     transform: translateX(-100%);
-    z-index: 10;
 }
 
 /* next prev button */
