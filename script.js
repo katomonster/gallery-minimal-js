@@ -5,6 +5,7 @@ const standByImages = document.querySelectorAll('.stand-by-image');
 const state = {
 	currentDirection: 'next',
 	x0: null,
+	activeRadio: null,
 }
 
 document.querySelectorAll('label.arrow-btn').forEach((btn, i) => {
@@ -52,7 +53,7 @@ function flipIdPosition(id, currentIndex, direction) {
 	});
 	setTimeout(() => {
 		predecessorImage.classList.remove('predecessor-image');
-	}, 500);
+	}, 2500);
 }
 
 /*
@@ -61,9 +62,11 @@ function flipIdPosition(id, currentIndex, direction) {
 const gallery = document.querySelector('.gallery-container');
 
 gallery.addEventListener('touchstart', handleSwipeStart, false);
-gallery.addEventListener('mousedown', handleSwipeStart, false);
+//gallery.addEventListener('mousedown', handleSwipeStart, false);
 gallery.addEventListener('touchend', handleSwipeEnd, false);
-gallery.addEventListener('mouseup', handleSwipeEnd, false)
+//gallery.addEventListener('mouseup', handleSwipeEnd, false);
+gallery.addEventListener('touchmove', handleSwipeMove, false);
+//gallery.addEventListener('mousemove', handleSwipeMove, false);
 
 function unifiedE(e) {
 	return e.changedTouches ? e.changedTouches[0] : e;
@@ -76,7 +79,6 @@ function handleSwipeStart(e) {
 function handleSwipeEnd(e) {
 	const endX = unifiedE(e).clientX;
 	const deltaX = endX - state.x0;
-	console.log('delta: ', deltaX);
 	if (Math.abs(deltaX) > 30) {
 		if (deltaX > 0) {
 			// trigger prev button
@@ -85,6 +87,25 @@ function handleSwipeEnd(e) {
 			// trigger next button
 			toggleSwipe('next');
 		}
+	}
+	state.activeRadio && state.activeRadio.classList.remove('active');
+	state.activeRadio = null;
+}
+
+function handleSwipeMove(e) {
+	const deltaX = unifiedE(e).clientX - state.x0;
+	if (Math.abs(deltaX) > 30) {
+		if (deltaX > 0) {
+			// get prev button's target radio input and add class to it.
+			const targetPrevBtn = document.querySelector('.gallery input[type=radio]:checked ~ .prev-btn');
+			state.activeRadio = document.getElementById(targetPrevBtn.getAttribute('for'));
+			
+		} else {
+			// get next button's target radio input and add class to it.
+			const targetNextBtn = document.querySelector('.gallery input[type=radio]:checked ~ .next-btn');
+			state.activeRadio = document.getElementById(targetNextBtn.getAttribute('for'));	
+		}
+		state.activeRadio.classList.add('active');
 	}
 }
 
