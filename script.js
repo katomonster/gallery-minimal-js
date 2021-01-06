@@ -50,7 +50,7 @@ function flipIdPosition(id, currentIndex, direction) {
 	state.currentDirection = direction;
 	setTimeout(() => {
 		targetRadioButton.classList.remove('in-transit');
-	});
+	}, 0);
 	setTimeout(() => {
 		predecessorImage.classList.remove('predecessor-image');
 	}, 2500);
@@ -97,12 +97,12 @@ function handleSwipeMove(e) {
 	if (Math.abs(deltaX) > 30) {
 		if (deltaX > 0) {
 			// get prev button's target radio input and add class to it.
-			const targetPrevBtn = document.querySelector('.gallery input[type=radio]:checked ~ .prev-btn');
+			const targetPrevBtn = document.querySelector('.gallery-container input[type=radio]:checked ~ .prev-btn');
 			state.activeRadio = document.getElementById(targetPrevBtn.getAttribute('for'));
 			
 		} else {
 			// get next button's target radio input and add class to it.
-			const targetNextBtn = document.querySelector('.gallery input[type=radio]:checked ~ .next-btn');
+			const targetNextBtn = document.querySelector('.gallery-container input[type=radio]:checked ~ .next-btn');
 			state.activeRadio = document.getElementById(targetNextBtn.getAttribute('for'));	
 		}
 		state.activeRadio.classList.add('active');
@@ -115,11 +115,11 @@ function handleSwipeMove(e) {
 
 function toggleSwipe(direction) {
 	if (direction === 'prev') {
-		const targetPrevBtn = document.querySelector('.gallery input[type=radio]:checked ~ .prev-btn');
+		const targetPrevBtn = document.querySelector('.gallery-container input[type=radio]:checked ~ .prev-btn');
 		//document.getElementById(targetPrevBtn.getAttribute('for')).checked = true;
 		targetPrevBtn.click();
 	} else if (direction === 'next') {
-		const targetNextBtn = document.querySelector('.gallery input[type=radio]:checked ~ .next-btn');
+		const targetNextBtn = document.querySelector('.gallery-container input[type=radio]:checked ~ .next-btn');
 		//document.getElementById(targetNextBtn.getAttribute('for')).checked = true;
 		targetNextBtn.click();
 	}
