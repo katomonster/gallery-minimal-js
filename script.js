@@ -12,16 +12,14 @@ document.querySelectorAll('label.arrow-btn').forEach((btn, i) => {
 	btn.addEventListener('click', e => {
 		if (btn.className.includes('prev')) {
 			// Prev button clicked
-			console.log('prev clicked');
-			addClassToStandByImages();
+			addForPrevTransitionClass();
 			if (state.currentDirection !== 'prev') {
 				flipIdPosition(btn.getAttribute('for'), Math.floor(i / 2), 'prev');
 			}
 			
 		} else {
 			// Next button clicked
-			console.log('next clicked');
-			removeClassToStandByImages();
+			removeForPrevTransitionClass();
 			if (state.currentDirection !== 'next') {
 				flipIdPosition(btn.getAttribute('for'), Math.floor(i / 2), 'next');
 			}
@@ -30,13 +28,13 @@ document.querySelectorAll('label.arrow-btn').forEach((btn, i) => {
 	}, false);
 });
 
-function addClassToStandByImages() {
+function addForPrevTransitionClass() {
 	standByImages.forEach(image => {
 		image.classList.add('for-prev');
 	});
 }
 
-function removeClassToStandByImages() {
+function removeForPrevTransitionClass() {
 	standByImages.forEach(image => {
 		image.classList.remove('for-prev');
 	});
@@ -48,12 +46,13 @@ function flipIdPosition(id, currentIndex, direction) {
 	targetRadioButton.classList.add('in-transit');
 	predecessorImage.classList.add('predecessor-image');
 	state.currentDirection = direction;
+	
 	setTimeout(() => {
 		targetRadioButton.classList.remove('in-transit');
 	}, 0);
 	setTimeout(() => {
 		predecessorImage.classList.remove('predecessor-image');
-	}, 2500);
+	}, 500);
 }
 
 /*
