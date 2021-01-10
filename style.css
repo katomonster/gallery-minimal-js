@@ -129,23 +129,27 @@ figure {
 
 .gallery-container input[type=radio]:checked + .stand-by-image {
     transform: translateX(0);
+    transition: transform 0ms ease-out;
     z-index: 10;
-}
-
-.gallery-container input[type=radio]:checked + .stand-by-image.flipping-image {
-    transform: translateX(100%);
 }
 
 .gallery-container input.in-transit[type=radio]:checked  + .stand-by-image {
     transform: translateX(100%);
+    transition: transform 0ms ease-out;
 }
 
 .gallery-container input.in-transit[type=radio]:checked + .stand-by-image.for-prev {
     transform: translateX(-100%);
+    transition: transform 0ms ease-out;
 }
 
 .gallery-container input[type=radio]:not(:active) + .stand-by-image {
     transition: transform 500ms ease-out;
+}
+
+.gallery-container input[type=radio]:checked + .stand-by-image.flipping-image {
+    transform: translateX(100%);
+    transition: transform 0ms ease-out;
 }
 
 .gallery-container input[type=radio].active + .stand-by-image {
