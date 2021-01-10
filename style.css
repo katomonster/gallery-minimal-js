@@ -296,7 +296,7 @@ figure {
 
 }
 
-@media (orientation: landscape) and (max-width: 1020px)  {
+@media (min-aspect-ratio: 815/543) and (max-width: 1020px)  {
     .gallery-unit-wrapper {
         /*top: calc(50% + 113px);*/
         height: auto;
@@ -316,7 +316,7 @@ figure {
     }
 }
 
-@media (orientation: landscape) and (max-width: 800px) {
+@media (min-aspect-ratio: 815/543) and (max-width: 800px) {
     .close-btn {
         top: 28px;
     }
