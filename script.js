@@ -2,6 +2,7 @@
 * When prev button is clicked, add class, '.for-prev' to '.stand-by-image', else, remove.
 */
 const standByImages = document.querySelectorAll('.stand-by-image');
+const gallery = document.querySelector('.gallery-container');
 const state = {
 	currentDirection: 'next',
 	x0: null,
@@ -12,14 +13,14 @@ document.querySelectorAll('label.arrow-btn').forEach((btn, i) => {
 	btn.addEventListener('click', e => {
 		if (btn.className.includes('prev')) {
 			// Prev button clicked
-			addForPrevTransitionClass();
+			addForPrevClass();
 			if (state.currentDirection !== 'prev') {
 				flipIdPosition(btn.getAttribute('for'), Math.floor(i / 2), 'prev');
 			}
 			
 		} else {
 			// Next button clicked
-			removeForPrevTransitionClass();
+			removeForPrevClass();
 			if (state.currentDirection !== 'next') {
 				flipIdPosition(btn.getAttribute('for'), Math.floor(i / 2), 'next');
 			}
@@ -28,16 +29,12 @@ document.querySelectorAll('label.arrow-btn').forEach((btn, i) => {
 	}, false);
 });
 
-function addForPrevTransitionClass() {
-	standByImages.forEach(image => {
-		image.classList.add('for-prev');
-	});
+function addForPrevClass() {
+	gallery.classList.add('for-prev');
 }
 
-function removeForPrevTransitionClass() {
-	standByImages.forEach(image => {
-		image.classList.remove('for-prev');
-	});
+function removeForPrevClass() {
+	gallery.classList.remove('for-prev');
 }
 
 function flipIdPosition(id, currentIndex, direction) {
@@ -58,7 +55,6 @@ function flipIdPosition(id, currentIndex, direction) {
 /*
 * Swipe events
 */
-const gallery = document.querySelector('.gallery-container');
 
 gallery.addEventListener('touchstart', handleSwipeStart, false);
 //gallery.addEventListener('mousedown', handleSwipeStart, false);

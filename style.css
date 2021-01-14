@@ -1,6 +1,7 @@
 /* ======= general styles ======= */
 input {
-    display: none;
+    position: absolute;
+    left: -1000px;
 }
 
 /* ======= main spawning ======= */
@@ -119,7 +120,7 @@ figure {
     transform: translateX(-100%);
 }
 
-.stand-by-image.for-prev {
+.for-prev .stand-by-image {
     transform: translateX(100%);
 }
 
@@ -138,7 +139,7 @@ figure {
     transition: transform 0ms ease-out;
 }
 
-.gallery-container input.in-transit[type=radio]:checked + .stand-by-image.for-prev {
+.gallery-container.for-prev input.in-transit[type=radio]:checked + .stand-by-image {
     transform: translateX(-100%);
     transition: transform 0ms ease-out;
 }
@@ -160,8 +161,8 @@ figure {
 .gallery-container input[type=radio].active + .stand-by-image:not(.flipping-direction) {
     transform: translateX(100%);
 }
-.gallery-container input[type=radio]:active + .stand-by-image.for-prev:not(.flipping-direction),
-.gallery-container input[type=radio].active + .stand-by-image.for-prev:not(.flipping-direction) {
+.gallery-container.for-prev input[type=radio]:active + .stand-by-image:not(.flipping-direction),
+.gallery-container.for-prev input[type=radio].active + .stand-by-image:not(.flipping-direction) {
     transform: translateX(-100%);
 }
 
